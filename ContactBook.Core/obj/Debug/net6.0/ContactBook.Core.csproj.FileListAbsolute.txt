@@ -9,3 +9,4 @@ C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net
 C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\refint\ContactBook.Core.dll
 C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.pdb
 C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ref\ContactBook.Core.dll
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\bin\Debug\net6.0\DemoDB.db

@@ -1,8 +1,10 @@
-﻿using ContactBook.Core.Helpers;
+﻿using ContactBook.Core.Database;
+using ContactBook.Core.Helpers;
 using ContactBook.Core.ViewModel.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,6 @@ namespace ContactBook.Core.ViewModel.Pages
     {
         public ObservableCollection<PearsonViewModel> PearsonList { get; set; } = new ObservableCollection<PearsonViewModel>();
         public ICommand AddPearsonCommand { get; set; }
-        public int xyz;
         public PearsonPageViewModel()
         {
             AddPearsonCommand = new RelayCommand(AddNewPearson);
@@ -26,20 +27,31 @@ namespace ContactBook.Core.ViewModel.Pages
             {
                 FirstName = FirstName,
                 LastName = LastName,
-                StreetName = StreetName,
-                HouseNumber = HouseNumber,
-                ApartmentNumber = ApartmentNumber,
-                PostalCode = PostalCode,
-                Town = Town,
-                PhoneNumber = PhoneNumber,
-                DateOfBirth = DateOfBirth,
+                //StreetName = StreetName,
+                //HouseNumber = HouseNumber,
+                //ApartmentNumber = ApartmentNumber,
+                //PostalCode = PostalCode,
+                //Town = Town,
+                //PhoneNumber = PhoneNumber,
+                //DateOfBirth = DateOfBirth,
             };
 
+            using (var dbContext = new DatabaseConfig())
+            {
+                var pearsonToAdd = new PearsonViewModel
+                {
+                    Id = NewPearson.Id,
+                    FirstName = NewPearson.FirstName,
+                    LastName = NewPearson.LastName
+                };
+                dbContext.Pearson.Add(NewPearson);
+                dbContext.SaveChanges();
+            }
 
             PearsonList.Add(NewPearson);
-            ClearFields(nameof(FirstName), nameof(LastName), nameof(StreetName),
-            nameof(Town)
-        );
+            //ClearFields(nameof(FirstName), nameof(LastName), nameof(StreetName),
+            //nameof(Town)
+        //);
         }
 
         private void ClearFields(params string[] propertyNames)

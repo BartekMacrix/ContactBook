@@ -27,3 +27,4 @@ C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\bin\Debug\net6.0-w
 C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\bin\Debug\net6.0-windows\ContactBook.Core.pdb
 C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\obj\Debug\net6.0-windows\ContactBook.csproj.AssemblyReference.cache
 C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\obj\Debug\net6.0-windows\ContactBook.csproj.CopyComplete
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\bin\Debug\net6.0-windows\DemoDB.db

@@ -1,0 +1,11 @@
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\bin\Debug\net6.0\ContactBook.Core.deps.json
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\bin\Debug\net6.0\ContactBook.Core.dll
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\bin\Debug\net6.0\ContactBook.Core.pdb
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.AssemblyInfoInputs.cache
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.AssemblyInfo.cs
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.csproj.CoreCompileInputs.cache
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.dll
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\refint\ContactBook.Core.dll
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ContactBook.Core.pdb
+C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook.Core\obj\Debug\net6.0\ref\ContactBook.Core.dll

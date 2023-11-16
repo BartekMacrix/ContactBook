@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:ContactBook"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PearsonPage">
+      Title="PearsonPage"
+      Loaded="Window_Loaded">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -26,7 +27,7 @@
             <TextBox Text="{Binding FirstName, Mode=TwoWay}"/>
 
             <TextBlock Text="Last Name:"/>
-            <TextBox Text="{Binding LastName, Mode=TwoWay}"/>
+            <TextBox Text="{Binding LastName, Mode=TwoWay}" />
 
             <TextBlock Text="Street Name"/>
             <TextBox Text="{Binding StreetName, Mode=TwoWay}"/>
@@ -52,7 +53,7 @@
             <TextBlock Text="Age"/>
             <TextBox Text="{Binding Age, Mode=TwoWay}"/>
 
-            <Button Content="Dodaj" Command="{Binding AddPearsonCommand}"/>
+            <Button Content="Dodaj" Command="{Binding AddPearsonCommand }"/>
             <Button Content="Edytuj"/>
         </StackPanel>
 
@@ -69,7 +70,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="red">
-            <Button Content="Dodaj"/>
+            <Button Content="UPDATE" Command="{Binding UpdateDatabase}"/>
         </StackPanel>
     </Grid>
 </Page>

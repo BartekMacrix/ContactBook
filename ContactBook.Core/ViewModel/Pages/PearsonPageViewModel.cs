@@ -1,14 +1,7 @@
 ﻿using ContactBook.Core.Database;
 using ContactBook.Core.Helpers;
 using ContactBook.Core.ViewModel.Controls;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ContactBook.Core.ViewModel.Pages
@@ -20,6 +13,7 @@ namespace ContactBook.Core.ViewModel.Pages
         public ICommand UpdateDatabase {  get; set; }
         public ICommand CancelUpdates {  get; set; }
         public ICommand DeleteFromTable {  get; set; }
+        public ICommand EditDataProvider { get; set; }
 
         public PearsonPageViewModel()
         {
@@ -27,6 +21,11 @@ namespace ContactBook.Core.ViewModel.Pages
             UpdateDatabase = new RelayCommand(UpdateData);
             CancelUpdates = new RelayCommand(LoadDataFromDatabase);
             DeleteFromTable = new RelayCommandWithParameter(param => DeletePearson(param));
+            EditDataProvider = new RelayCommand(EditData);
+        }
+
+        private void EditData()
+        {
         }
 
         private void DeletePearson(object parameter)

@@ -8,28 +8,28 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="70"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="{Binding FirstName}" Grid.Column="0" Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding LastName}" Grid.Column="1"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding StreetName}" Grid.Column="2"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding HouseNumber}" Grid.Column="3"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding ApartmentNumber}" Grid.Column="4"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding PostalCode}" Grid.Column="5"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding Town}" Grid.Column="6"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding PhoneNumber}" Grid.Column="7"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding DateOfBirth}" Grid.Column="8"  Margin="0,0,10,0"/>
-        <TextBlock Text="{Binding Age}" Grid.Column="9"  Margin="0,0,10,0"/>
+        <TextBox Text="{Binding FirstName}" Grid.Column="0" Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding LastName}" Grid.Column="1"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding StreetName}" Grid.Column="2"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding HouseNumber}" Grid.Column="3"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding ApartmentNumber}" Grid.Column="4"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding PostalCode}" Grid.Column="5"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding Town}" Grid.Column="6"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding PhoneNumber}" Grid.Column="7"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding DateOfBirth}" Grid.Column="8"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
+        <TextBox Text="{Binding Age}" Grid.Column="9"  Margin="0,0,10,0" IsEnabled="{Binding IsEditing}"/>
     </Grid>
 
 </UserControl>

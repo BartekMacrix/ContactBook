@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ContactBook.Core\ContactBook.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Icons\" />
+  </ItemGroup>
+
 </Project>

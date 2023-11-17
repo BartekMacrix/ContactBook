@@ -19,11 +19,22 @@ namespace ContactBook.Core.ViewModel.Pages
         public ICommand AddPearsonCommand { get; set; }
         public ICommand UpdateDatabase {  get; set; }
         public ICommand CancelUpdates {  get; set; }
+        public ICommand DeleteFromTable {  get; set; }
+
         public PearsonPageViewModel()
         {
             AddPearsonCommand = new RelayCommand(AddNewPearson);
             UpdateDatabase = new RelayCommand(UpdateData);
             CancelUpdates = new RelayCommand(LoadDataFromDatabase);
+            DeleteFromTable = new RelayCommandWithParameter(param => DeletePearson(param));
+        }
+
+        private void DeletePearson(object parameter)
+        {
+            if (parameter is PearsonViewModel pearsonToDelete)
+            {
+                PearsonList.Remove(pearsonToDelete);
+            }
         }
 
         public void AddNewPearson()
@@ -111,6 +122,9 @@ namespace ContactBook.Core.ViewModel.Pages
                         dbContext.Pearson.Add(newPearson);
                     }
                 }
+                var CurrentPearsonList = PearsonList.Select(x=> x.Id).ToList();
+                var DataToDeleteInDb = dbContext.Pearson.Where(p => !CurrentPearsonList.Contains(p.Id));
+                dbContext.Pearson.RemoveRange(DataToDeleteInDb);
                 dbContext.SaveChanges();
             }
         }

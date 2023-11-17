@@ -9,7 +9,7 @@
       Title="PearsonPage"
       Loaded="Window_Loaded">
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -23,54 +23,48 @@
         <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" 
               VerticalAlignment="Stretch" MinHeight="400" Margin="20"
               Background="AliceBlue">
-            <TextBlock Text="First Name:"/>
-            <TextBox Text="{Binding FirstName, Mode=TwoWay}"/>
-
-            <TextBlock Text="Last Name:"/>
-            <TextBox Text="{Binding LastName, Mode=TwoWay}" />
-
-            <TextBlock Text="Street Name"/>
-            <TextBox Text="{Binding StreetName, Mode=TwoWay}"/>
-
-            <TextBlock Text="House Number"/>
-            <TextBox Text="{Binding HouseNumber, Mode=TwoWay}"/>
-
-            <TextBlock Text="Apartment Number"/>
-            <TextBox Text="{Binding ApartmentNumber, Mode=TwoWay}"/>
-
-            <TextBlock Text="PostalCode Name"/>
-            <TextBox Text="{Binding PostalCode, Mode=TwoWay}"/>
-
-            <TextBlock Text="Town"/>
-            <TextBox Text="{Binding Town, Mode=TwoWay}"/>
-
-            <TextBlock Text="Phone Number"/>
-            <TextBox Text="{Binding PhoneNumber, Mode=TwoWay}"/>
-
-            <TextBlock Text="Dat Of Birth"/>
-            <TextBox Text="{Binding DateOfBirth, Mode=TwoWay}"/>
-
-            <TextBlock Text="Age"/>
-            <TextBox Text="{Binding Age, Mode=TwoWay}"/>
-
-            <Button Content="Dodaj" Command="{Binding AddPearsonCommand }"/>
-            <Button Content="Edytuj"/>
+            
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gray">
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="Gray">
             <ScrollViewer MinHeight="300" Height="300" MinWidth="450">
                 <ItemsControl ItemsSource="{Binding PearsonList}" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <local:Pearson />
+                            <StackPanel Orientation="Horizontal">
+                                <local:Pearson />
+
+                                <Button Command="">
+                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
+                                </Button>
+                                <Button Command="{Binding DataContext.DeleteFromTable, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                CommandParameter="{Binding}" Margin="2 0 0 0">
+                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>
+                                </Button>
+                            </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding FirstName, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding LastName, Mode=TwoWay}" Width="70" />
+                <TextBox Text="{Binding StreetName, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding HouseNumber, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding ApartmentNumber, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding PostalCode, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding Town, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding PhoneNumber, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding DateOfBirth, Mode=TwoWay}" Width="70"/>
+                <TextBox Text="{Binding Age, Mode=TwoWay}" Width="70"/>
+
+                <Button Content="Dodaj" Command="{Binding AddPearsonCommand }"/>
+                <Button Content="Edytuj"/>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="red">
-            <Button Content="UPDATE" Command="{Binding UpdateDatabase}"/>
+            <Button Content="SAVE" Command="{Binding UpdateDatabase}"/>
             <Button Content="CANCEL" Command="{Binding CancelUpdates}"/>
         </StackPanel>
     </Grid>

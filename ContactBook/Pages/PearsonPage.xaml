@@ -71,6 +71,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="red">
             <Button Content="UPDATE" Command="{Binding UpdateDatabase}"/>
+            <Button Content="CANCEL" Command="{Binding CancelUpdates}"/>
         </StackPanel>
     </Grid>
 </Page>

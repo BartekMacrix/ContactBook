@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ContactBook.Core.ViewModel.Controls
 {
     [Table("Pearson")]
-    public class PearsonViewModel : INotifyPropertyChanged
+    public class PearsonViewModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,8 +26,5 @@ namespace ContactBook.Core.ViewModel.Controls
         //public DateTime DateOfBirth { get; set; }
         //public int Age { get; set; }
 
-        public event PropertyChangedEventHandler? PropertyChanged = (s, e) => { };
-
-        protected void OnPropertyChanged(string name) => PropertyChanged(this, new PropertyChangedEventArgs(name));
     }
 }

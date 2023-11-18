@@ -1,4 +1,7 @@
 ﻿
+using ContactBook.Core.ViewModel.Controls;
+using ContactBook.Core.ViewModel.Pages;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ContactBook

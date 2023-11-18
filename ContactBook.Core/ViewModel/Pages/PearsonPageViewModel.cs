@@ -1,14 +1,15 @@
 ﻿using ContactBook.Core.Database;
 using ContactBook.Core.Helpers;
 using ContactBook.Core.ViewModel.Controls;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace ContactBook.Core.ViewModel.Pages
 {
-    public class PearsonPageViewModel : PearsonViewModel
+    public class PearsonPageViewModel : BasePearson
     {
-        public ObservableCollection<PearsonViewModel> PearsonList { get; set; } = new ObservableCollection<PearsonViewModel>();
+        public ObservableCollection<BasePearson> PearsonList { get; set; } = new ObservableCollection<BasePearson>();
         public ICommand AddPearsonCommand { get; set; }
         public ICommand UpdateDatabase {  get; set; }
         public ICommand CancelUpdates {  get; set; }
@@ -21,16 +22,21 @@ namespace ContactBook.Core.ViewModel.Pages
             UpdateDatabase = new RelayCommand(UpdateData);
             CancelUpdates = new RelayCommand(LoadDataFromDatabase);
             DeleteFromTable = new RelayCommandWithParameter(param => DeletePearson(param));
-            EditDataProvider = new RelayCommand(EditData);
+            EditDataProvider = new RelayCommandWithParameter(EditData);
         }
 
-        private void EditData()
+        private void EditData(object parameter)
         {
+            if ( parameter is BasePearson pearson )
+            {
+                pearson.IsEditing = true;
+                OnPropertyChanged(nameof(IsEditing));
+            }
         }
 
         private void DeletePearson(object parameter)
         {
-            if (parameter is PearsonViewModel pearsonToDelete)
+            if (parameter is BasePearson pearsonToDelete)
             {
                 PearsonList.Remove(pearsonToDelete);
             }
@@ -42,7 +48,8 @@ namespace ContactBook.Core.ViewModel.Pages
             {
                 int maxId = dbContext.Pearson.Max(p => (int?)p.Id) ?? 0;
                 Id = maxId + 1;
-            var NewPearson = new PearsonViewModel
+
+            var NewPearson = new BasePearson
             {
                 Id = Id,
                 FirstName = FirstName,
@@ -136,7 +143,7 @@ namespace ContactBook.Core.ViewModel.Pages
 
                 foreach (var pearson in dbContext.Pearson)
                 {
-                    PearsonList.Add(new PearsonViewModel
+                    PearsonList.Add(new BasePearson
                     {
                         Id = pearson.Id,
                         FirstName = pearson.FirstName,

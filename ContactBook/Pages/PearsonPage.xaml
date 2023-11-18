@@ -39,12 +39,14 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <local:Pearson />
+
+                            <local:Pearson IsEnabled="{Binding IsEditing, Mode=TwoWay}"/>
 
                             <Button Command="{Binding DataContext.EditDataProvider, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                   CommandParameter="{Binding}" Margin="2 0 0 0">
+                                CommandParameter="{Binding}" Margin="2 0 0 0">
                                 <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
                             </Button>
+
                             <Button Command="{Binding DataContext.DeleteFromTable, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                 CommandParameter="{Binding}" Margin="2 0 0 0">
                                 <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>

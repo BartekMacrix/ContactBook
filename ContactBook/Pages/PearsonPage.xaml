@@ -8,8 +8,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PearsonPage"
       Loaded="Window_Loaded">
+    <Page.Resources>
+        <local:NullableIntToStringConverter x:Key="NullableIntToStringConverter" />
+    </Page.Resources>
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
@@ -20,62 +24,60 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="Gray">
+        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="#FFFFD26E">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="FirstName"  Width="90"/>
-                <TextBlock Text="LastName" Width="90"/>
-                <TextBlock Text="StreetName" Width="90"/>
-                <TextBlock Text="HouseNumber" Width="30"/>
-                <TextBlock Text="ApartamentNumber" Width="30"/>
-                <TextBlock Text="PostalCode" Width="50"/>
-                <TextBlock Text="Town" Width="90"/>
-                <TextBlock Text="PhoneNumber" Width="90"/>
-                <TextBlock Text="DateOfBirth" Width="70"/>
-                <TextBlock Text="Age" Width="70"/>
+                <TextBlock Text="FirstName"  Width="90" Margin="10 0 0 0" FontWeight="Bold"/>
+                <TextBlock Text="LastName" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Street" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="HouseNo" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="ApartamentNo" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="PostalCode" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Town" Width="90" FontWeight="Bold" />
+                <TextBlock Text="PhoneNumber" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="DateOfBirth" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Age" Width="90" FontWeight="Bold"/>
             </StackPanel>
         </StackPanel>
         <ScrollViewer Grid.Column="0" Grid.Row="1" MinHeight="300" Height="300" MinWidth="450">
-            <ItemsControl ItemsSource="{Binding PearsonList}" Margin="10">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding PearsonList}" Margin="10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <local:Pearson IsEnabled="{Binding IsEditing, Mode=TwoWay}"/>
+                                <Button Command="{Binding DataContext.EditDataProvider, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                CommandParameter="{Binding}" Margin="2 0 0 0" Background="White">
+                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
+                                </Button>
+                                <Button Command="{Binding DataContext.DeleteFromTable, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                CommandParameter="{Binding}" Margin="2 0 0 0" Background="White">
+                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-                            <local:Pearson IsEnabled="{Binding IsEditing, Mode=TwoWay}"/>
+                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+                    <TextBox Text="{Binding FirstName, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding LastName, Mode=TwoWay}" Width="90" />
+                    <TextBox Text="{Binding StreetName, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding HouseNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding ApartmentNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding PostalCode, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding Town, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding PhoneNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
+                    <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding Age, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
+                    <Button Content="Dodaj" Command="{Binding AddPearsonCommand }" Width="50" Margin="10 0 0 0" Background="#FFFFA400"/>
 
-                            <Button Command="{Binding DataContext.EditDataProvider, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                CommandParameter="{Binding}" Margin="2 0 0 0">
-                                <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
-                            </Button>
-
-                            <Button Command="{Binding DataContext.DeleteFromTable, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                CommandParameter="{Binding}" Margin="2 0 0 0">
-                                <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>
-                            </Button>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                </StackPanel>
+            </StackPanel>
         </ScrollViewer>
 
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-            <TextBox Text="{Binding FirstName, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding LastName, Mode=TwoWay}" Width="70" />
-            <TextBox Text="{Binding StreetName, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding HouseNumber, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding ApartmentNumber, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding PostalCode, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding Town, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding PhoneNumber, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding DateOfBirth, Mode=TwoWay}" Width="70"/>
-            <TextBox Text="{Binding Age, Mode=TwoWay}" Width="70"/>
-
-            <Button Content="Dodaj" Command="{Binding AddPearsonCommand }"/>
-
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-            <Button Content="SAVE" Command="{Binding UpdateDatabase}"/>
-            <Button Content="CANCEL" Command="{Binding CancelUpdates}"/>
+        <StackPanel Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
+            <Button Content="SAVE" IsEnabled="False" FontWeight="Bold" Command="{Binding UpdateDatabase}" Background="#FFFFA400" Height="50" Width="150" Margin="25"/>
+            <Button Content="CANCEL" FontWeight="Bold" IsEnabled="False" Command="{Binding CancelUpdates}" Background="#FFFFA400" Height="50" Width="150" Margin="25"/>
         </StackPanel>
     </Grid>
 </Page>

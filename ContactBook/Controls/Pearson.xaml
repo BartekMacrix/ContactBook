@@ -12,13 +12,13 @@
             <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="90"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="90"/>
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Text="{Binding FirstName}" Grid.Column="0" Margin="0,0,10,0" />

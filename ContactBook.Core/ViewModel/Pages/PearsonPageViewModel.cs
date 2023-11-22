@@ -21,7 +21,7 @@ namespace ContactBook.Core.ViewModel.Pages
             AddPearsonCommand = new RelayCommand(AddNewPearson);
             UpdateDatabase = new RelayCommand(UpdateData);
             CancelUpdates = new RelayCommand(LoadDataFromDatabase);
-            DeleteFromTable = new RelayCommandWithParameter(param => DeletePearson(param));
+            DeleteFromTable = new RelayCommandWithParameter(DeletePearson);
             EditDataProvider = new RelayCommandWithParameter(EditData);
         }
 
@@ -44,30 +44,33 @@ namespace ContactBook.Core.ViewModel.Pages
 
         public void AddNewPearson()
         {
-            using(var dbContext = new DatabaseConfig())
+            if (FirstName != null)
             {
-                int maxId = dbContext.Pearson.Max(p => (int?)p.Id) ?? 0;
-                Id = maxId + 1;
+                using (var dbContext = new DatabaseConfig())
+                {
+                    int maxId = dbContext.Pearson.Max(p => (int?)p.Id) ?? 0;
+                    Id = maxId + 1;
 
-            var NewPearson = new BasePearson
-            {
-                Id = Id,
-                FirstName = FirstName,
-                LastName = LastName,
-                StreetName = StreetName,
-                HouseNumber = HouseNumber,
-                ApartmentNumber = ApartmentNumber,
-                PostalCode = PostalCode,
-                Town = Town,
-                PhoneNumber = PhoneNumber,
-                //DateOfBirth = DateOfBirth,
-            };
+                    var NewPearson = new BasePearson
+                    {
+                        Id = Id,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        StreetName = StreetName,
+                        HouseNumber = HouseNumber,
+                        ApartmentNumber = ApartmentNumber,
+                        PostalCode = PostalCode,
+                        Town = Town,
+                        PhoneNumber = PhoneNumber,
+                        DateOfBirth = DateOfBirth.Date,
+                    };
 
-            PearsonList.Add(NewPearson);
-                //ClearFields(nameof(FirstName), nameof(LastName), nameof(StreetName),
-                //    nameof(HouseNumber), nameof(ApartmentNumber), nameof(PostalCode),
-                //nameof(Town), nameof(PhoneNumber)
-                //);
+                    PearsonList.Add(NewPearson);
+                    ClearFields(nameof(FirstName), nameof(LastName), nameof(StreetName),
+                    nameof(HouseNumber), nameof(ApartmentNumber), nameof(PostalCode),
+                    nameof(Town), nameof(PhoneNumber)
+                    );
+                }
             }
         }
 
@@ -164,7 +167,15 @@ namespace ContactBook.Core.ViewModel.Pages
         {
             foreach(var propertyName in propertyNames)
             {
-                GetType().GetProperty(propertyName)?.SetValue(this, string.Empty);
+                var propertyInfo = GetType().GetProperty(propertyName);
+                if (propertyInfo.PropertyType == typeof(string))
+                {
+                    propertyInfo.SetValue(this, string.Empty);
+                }
+                else if (propertyInfo.PropertyType == typeof(int))
+                {
+                    propertyInfo.SetValue(this, 0);
+                }
                 OnPropertyChanged(propertyName);
             }
         }

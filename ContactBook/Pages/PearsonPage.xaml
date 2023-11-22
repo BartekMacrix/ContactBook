@@ -10,6 +10,7 @@
       Loaded="Window_Loaded">
     <Page.Resources>
         <local:NullableIntToStringConverter x:Key="NullableIntToStringConverter" />
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisiblityConverter" />
     </Page.Resources>
 
 
@@ -43,17 +44,30 @@
                 <ItemsControl ItemsSource="{Binding PearsonList}" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
+                            
+                            
                             <StackPanel Orientation="Horizontal">
                                 <local:Pearson IsEnabled="{Binding IsEditing, Mode=TwoWay}"/>
+
+                                <Button Command="{Binding DataContext.AcceptEditData, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                    CommandParameter="{Binding}" Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisiblityConverter},
+                                    Mode=TwoWay}" Margin="2 0 0 0" Background="White" BorderBrush="White">
+                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\save.png" Height="15"/>
+                                </Button>
+                                
                                 <Button Command="{Binding DataContext.EditDataProvider, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">
+                                        CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">      
                                     <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
                                 </Button>
+
                                 <Button Command="{Binding DataContext.DeleteFromTable, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                 CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">
                                     <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>
                                 </Button>
+                                
                             </StackPanel>
+                            
+                            
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -64,12 +78,12 @@
                     <TextBox Text="{Binding StreetName, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding HouseNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding ApartmentNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
-                    <TextBox Text="{Binding PostalCode, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
+                    <TextBox Text="{Binding PostalCode, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding Town, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding PhoneNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
                     <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding Age, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90" IsEnabled="False"/>
-                    <Button Content="Dodaj" Command="{Binding AddPearsonCommand }" Width="50" Margin="10 0 0 0" Background="#FFFFA400"/>
+                    <Button Content="ADD" FontWeight="Bold" Command="{Binding AddPearsonCommand }" Width="50" Margin="10 0 0 0" Background="#FFFFA400"/>
 
                 </StackPanel>
             </StackPanel>

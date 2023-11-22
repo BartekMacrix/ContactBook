@@ -15,6 +15,7 @@ namespace ContactBook.Core.ViewModel.Pages
         public ICommand CancelUpdates {  get; set; }
         public ICommand DeleteFromTable {  get; set; }
         public ICommand EditDataProvider { get; set; }
+        public ICommand AcceptEditData { get; set; }
 
         public PearsonPageViewModel()
         {
@@ -23,6 +24,16 @@ namespace ContactBook.Core.ViewModel.Pages
             CancelUpdates = new RelayCommand(LoadDataFromDatabase);
             DeleteFromTable = new RelayCommandWithParameter(DeletePearson);
             EditDataProvider = new RelayCommandWithParameter(EditData);
+            AcceptEditData = new RelayCommandWithParameter(AcceptEdit);
+        }
+
+        private void AcceptEdit(object parameter)
+        {
+            if (parameter is BasePearson pearson)
+            {
+                pearson.IsEditing = false;
+                OnPropertyChanged(nameof(IsEditing));
+            }
         }
 
         private void EditData(object parameter)
@@ -69,7 +80,7 @@ namespace ContactBook.Core.ViewModel.Pages
                     PearsonList.Add(NewPearson);
                     ClearFields(nameof(FirstName), nameof(LastName), nameof(StreetName),
                     nameof(HouseNumber), nameof(ApartmentNumber), nameof(PostalCode),
-                    nameof(Town), nameof(PhoneNumber)
+                    nameof(Town), nameof(PhoneNumber), nameof(DateOfBirth)
                     );
                 }
             }
@@ -83,61 +94,60 @@ namespace ContactBook.Core.ViewModel.Pages
         {
             using (var dbContext = new DatabaseConfig())
             {
+                var currentPearsonIds = PearsonList.Select(x => x.Id).ToList();
+                var databasePearsons = dbContext.Pearson.Where(p => currentPearsonIds.Contains(p.Id)).ToList();
+
                 foreach (var viewModel in PearsonList)
                 {
-                    int matchingIdFromDatabase = dbContext.Pearson
-                     .Where(p => p.Id == viewModel.Id)
-                     .Select(p => (int?)p.Id)
-                     .FirstOrDefault() ?? 0;
+                    var database = databasePearsons.FirstOrDefault(p => p.Id == viewModel.Id);
 
-
-                    if (matchingIdFromDatabase != 0)
+                    if (database != null)
                     {
 
-                        if (viewModel.FirstName != FirstName)
-                            viewModel.FirstName = FirstName;
+                        if (viewModel.FirstName != database.FirstName)
+                                database.FirstName = viewModel.FirstName;
 
-                        if (viewModel.LastName != LastName)
-                            viewModel.LastName = LastName;
+                            if (viewModel.LastName != database.LastName)
+                                 database.LastName = viewModel.LastName;
 
-                        if (viewModel.StreetName != StreetName)
-                            viewModel.StreetName = StreetName;
+                            if (viewModel.StreetName != database.StreetName)
+                                database.StreetName = viewModel.StreetName;
 
-                        if (viewModel.HouseNumber != HouseNumber)
-                            viewModel.HouseNumber = HouseNumber;
+                            if (viewModel.HouseNumber != database.HouseNumber)
+                                database.HouseNumber = viewModel.HouseNumber;
 
-                        if (viewModel.ApartmentNumber != ApartmentNumber)
-                            viewModel.ApartmentNumber = ApartmentNumber;
+                            if (viewModel.ApartmentNumber != database.ApartmentNumber)
+                                database.ApartmentNumber = viewModel.ApartmentNumber;
 
-                        if (viewModel.PostalCode != PostalCode)
-                            viewModel.PostalCode = PostalCode;
+                            if (viewModel.PostalCode != database.PostalCode)
+                                database.PostalCode = viewModel.PostalCode;
 
-                        if (viewModel.Town != Town)
-                            viewModel.Town = Town;
+                            if (viewModel.Town != database.Town)
+                                database.Town = viewModel.Town;
 
-                        if (viewModel.PhoneNumber != PhoneNumber)
-                            viewModel.PhoneNumber = PhoneNumber;
+                            if (viewModel.PhoneNumber != database.PhoneNumber)
+                                database.PhoneNumber = viewModel.PhoneNumber;
 
-                    }
-                    else
-                    {
-                        var newPearson = new PearsonViewModel
+                        }
+                        else
                         {
-                            FirstName = viewModel.FirstName,
-                            LastName = viewModel.LastName,
-                            StreetName = viewModel.StreetName,
-                            HouseNumber = viewModel.HouseNumber,
-                            ApartmentNumber = viewModel.ApartmentNumber,
-                            PostalCode = viewModel.PostalCode,
-                            Town = viewModel.Town,
-                            PhoneNumber = viewModel.PhoneNumber,
-                            DateOfBirth = viewModel.DateOfBirth,
-                            Age = viewModel.Age,
-                        };
+                            var newPearson = new PearsonViewModel
+                            {
+                                FirstName = viewModel.FirstName,
+                                LastName = viewModel.LastName,
+                                StreetName = viewModel.StreetName,
+                                HouseNumber = viewModel.HouseNumber,
+                                ApartmentNumber = viewModel.ApartmentNumber,
+                                PostalCode = viewModel.PostalCode,
+                                Town = viewModel.Town,
+                                PhoneNumber = viewModel.PhoneNumber,
+                                DateOfBirth = viewModel.DateOfBirth,
+                                Age = viewModel.Age,
+                            };
 
-                        dbContext.Pearson.Add(newPearson);
+                            dbContext.Pearson.Add(newPearson);
+                        }
                     }
-                }
                 var CurrentPearsonList = PearsonList.Select(x=> x.Id).ToList();
                 var DataToDeleteInDb = dbContext.Pearson.Where(p => !CurrentPearsonList.Contains(p.Id));
                 dbContext.Pearson.RemoveRange(DataToDeleteInDb);
@@ -184,6 +194,10 @@ namespace ContactBook.Core.ViewModel.Pages
                 else if (propertyInfo.PropertyType == typeof(int))
                 {
                     propertyInfo.SetValue(this, 0);
+                }
+                else if (propertyInfo.PropertyType == typeof(DateTime))
+                {
+                    propertyInfo.SetValue(this, DateTime.Today);
                 }
                 OnPropertyChanged(propertyName);
             }

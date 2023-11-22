@@ -63,6 +63,7 @@ namespace ContactBook.Core.ViewModel.Pages
                         Town = Town,
                         PhoneNumber = PhoneNumber,
                         DateOfBirth = DateOfBirth.Date,
+                        Age = Age,
                     };
 
                     PearsonList.Add(NewPearson);
@@ -130,6 +131,8 @@ namespace ContactBook.Core.ViewModel.Pages
                             PostalCode = viewModel.PostalCode,
                             Town = viewModel.Town,
                             PhoneNumber = viewModel.PhoneNumber,
+                            DateOfBirth = viewModel.DateOfBirth,
+                            Age = viewModel.Age,
                         };
 
                         dbContext.Pearson.Add(newPearson);
@@ -161,6 +164,8 @@ namespace ContactBook.Core.ViewModel.Pages
                         PostalCode = pearson.PostalCode,
                         Town = pearson.Town,
                         PhoneNumber = pearson.PhoneNumber,
+                        DateOfBirth = pearson.DateOfBirth,
+                        Age = pearson.Age,
                     });
                 }
             }

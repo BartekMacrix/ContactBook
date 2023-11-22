@@ -68,7 +68,7 @@
                     <TextBox Text="{Binding Town, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding PhoneNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
                     <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Width="90"/>
-                    <TextBox Text="{Binding Age}" Width="90" IsEnabled="False"/>
+                    <TextBox Text="{Binding Age, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90" IsEnabled="False"/>
                     <Button Content="Dodaj" Command="{Binding AddPearsonCommand }" Width="50" Margin="10 0 0 0" Background="#FFFFA400"/>
 
                 </StackPanel>

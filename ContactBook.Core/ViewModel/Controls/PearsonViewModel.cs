@@ -23,8 +23,8 @@ namespace ContactBook.Core.ViewModel.Controls
         public int PostalCode { get; set; }
         public string Town { get; set; }
         public int PhoneNumber { get; set; }
-        //public DateTime DateOfBirth { get; set; }
-        //public int Age { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public int Age { get; set; }
 
     }
 }

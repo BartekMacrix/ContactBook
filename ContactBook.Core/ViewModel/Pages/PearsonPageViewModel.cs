@@ -72,6 +72,10 @@ namespace ContactBook.Core.ViewModel.Pages
                     );
                 }
             }
+            else 
+            {
+                
+            }
         }
 
         public void UpdateData()

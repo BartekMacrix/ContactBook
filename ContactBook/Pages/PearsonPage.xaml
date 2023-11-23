@@ -27,15 +27,15 @@
 
         <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="#FFFFD26E">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="FirstName"  Width="90" Margin="10 0 0 0" FontWeight="Bold"/>
-                <TextBlock Text="LastName" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="First Name"  Width="90" Margin="10 0 0 0" FontWeight="Bold"/>
+                <TextBlock Text="Last Name" Width="90" FontWeight="Bold"/>
                 <TextBlock Text="Street" Width="90" FontWeight="Bold"/>
-                <TextBlock Text="HouseNo" Width="90" FontWeight="Bold"/>
-                <TextBlock Text="ApartamentNo" Width="90" FontWeight="Bold"/>
-                <TextBlock Text="PostalCode" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="House No." Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Apartment No." Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Postal Code" Width="90" FontWeight="Bold"/>
                 <TextBlock Text="Town" Width="90" FontWeight="Bold" />
-                <TextBlock Text="PhoneNumber" Width="90" FontWeight="Bold"/>
-                <TextBlock Text="DateOfBirth" Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Phone No." Width="90" FontWeight="Bold"/>
+                <TextBlock Text="Date of Birth" Width="90" FontWeight="Bold"/>
                 <TextBlock Text="Age" Width="90" FontWeight="Bold"/>
             </StackPanel>
         </StackPanel>
@@ -49,12 +49,6 @@
                             <StackPanel Orientation="Horizontal">
                                 <local:Pearson IsEnabled="{Binding IsEditing, Mode=TwoWay}"/>
 
-                                <Button Command="{Binding DataContext.AcceptEditData, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                    CommandParameter="{Binding}" Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisiblityConverter},
-                                    Mode=TwoWay}" Margin="2 0 0 0" Background="White" BorderBrush="White">
-                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\save.png" Height="15"/>
-                                </Button>
-                                
                                 <Button Command="{Binding DataContext.EditDataProvider, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                         CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">      
                                     <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
@@ -64,7 +58,13 @@
                                 CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">
                                     <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>
                                 </Button>
-                                
+
+                                <Button Command="{Binding DataContext.AcceptEditData, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                    CommandParameter="{Binding}" Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisiblityConverter},
+                                    Mode=TwoWay}" Margin="2 0 0 0" Background="White" BorderBrush="White">
+                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\save.png" Height="15"/>
+                                </Button>
+
                             </StackPanel>
                             
                             
@@ -86,12 +86,16 @@
                     <Button Content="ADD" FontWeight="Bold" Command="{Binding AddPearsonCommand }" Width="50" Margin="10 0 0 0" Background="#FFFFA400"/>
 
                 </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Visibility="{Binding ErrorDataInfo, Converter={StaticResource BooleanToVisiblityConverter}}" Text="Your entered data is incorrect. Please try filling out the form again. Remember to enter digits in numeric fields, and ensure that the phone number contains exactly 9 digits."
+                               Foreground="Red" FontWeight="Bold"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
 
         <StackPanel Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" Orientation="Horizontal">
-            <Button Content="SAVE"  FontWeight="Bold" Command="{Binding UpdateDatabase}" Background="#FFFFA400" Height="50" Width="150" Margin="25"/>
-            <Button Content="CANCEL" FontWeight="Bold" Command="{Binding CancelUpdates}" Background="#FFFFA400" Height="50" Width="150" Margin="25"/>
+            <Button IsEnabled="{Binding SynchronizeData}"  Content="SAVE"  FontWeight="Bold" Command="{Binding UpdateDatabase}" Background="#FFFFA400" Height="50" Width="150" Margin="25"/>
+            <Button IsEnabled="{Binding SynchronizeData}"  Content="CANCEL" FontWeight="Bold" Command="{Binding CancelUpdates}" Background="#FFFFA400" Height="50" Width="150" Margin="25"/>
         </StackPanel>
     </Grid>
 </Page>

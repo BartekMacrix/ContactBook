@@ -33,6 +33,7 @@ namespace ContactBook.Core.ViewModel.Pages
             {
                 pearson.IsEditing = false;
                 OnPropertyChanged(nameof(IsEditing));
+                SynchronizeData = true;
             }
         }
 
@@ -50,13 +51,23 @@ namespace ContactBook.Core.ViewModel.Pages
             if (parameter is BasePearson pearsonToDelete)
             {
                 PearsonList.Remove(pearsonToDelete);
+                SynchronizeData = true;
             }
         }
 
         public void AddNewPearson()
         {
-            if (FirstName != null)
+            if (FirstName != null && FirstName != String.Empty &&
+                LastName != null && LastName != String.Empty &&
+                StreetName != null && StreetName != String.Empty &&
+                HouseNumber.ToString().Length > 0 &&
+                PostalCode != null && PostalCode != String.Empty &&
+                Town != null && Town != String.Empty &&
+                PhoneNumber.ToString().Length == 9 &&
+                Age.ToString().Length > 0)
             {
+                SynchronizeData = true;
+                ErrorDataInfo = false;
                 using (var dbContext = new DatabaseConfig())
                 {
                     int maxId = dbContext.Pearson.Max(p => (int?)p.Id) ?? 0;
@@ -86,7 +97,7 @@ namespace ContactBook.Core.ViewModel.Pages
             }
             else 
             {
-                
+                ErrorDataInfo = true;
             }
         }
 
@@ -151,6 +162,7 @@ namespace ContactBook.Core.ViewModel.Pages
                 var CurrentPearsonList = PearsonList.Select(x=> x.Id).ToList();
                 var DataToDeleteInDb = dbContext.Pearson.Where(p => !CurrentPearsonList.Contains(p.Id));
                 dbContext.Pearson.RemoveRange(DataToDeleteInDb);
+                SynchronizeData = false;
                 dbContext.SaveChanges();
             }
         }
@@ -178,6 +190,7 @@ namespace ContactBook.Core.ViewModel.Pages
                         Age = pearson.Age,
                     });
                 }
+                SynchronizeData = false;
             }
         }
 

@@ -13,7 +13,6 @@
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisiblityConverter" />
     </Page.Resources>
 
-
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -39,7 +38,7 @@
                 <TextBlock Text="Age" Width="90" FontWeight="Bold"/>
             </StackPanel>
         </StackPanel>
-        <ScrollViewer Grid.Column="0" Grid.Row="1" MinHeight="300" Height="300" MinWidth="450">
+        <ScrollViewer Grid.Column="0" Grid.Row="1" MinHeight="300" Height="500" MinWidth="450">
             <StackPanel>
                 <ItemsControl ItemsSource="{Binding PearsonList}" Margin="10">
                     <ItemsControl.ItemTemplate>

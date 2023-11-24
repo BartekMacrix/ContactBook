@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Icon="/Icons/contactsbook.png"
         Title="CONTACT BOOK" Height="auto" Width="auto"
-        MinHeight="500" MinWidth="1000">
+        MinHeight="650" MinWidth="1000">
     <local:PearsonPage/>
 </Window>

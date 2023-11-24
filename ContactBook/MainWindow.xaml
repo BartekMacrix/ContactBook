@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactBook"
         mc:Ignorable="d"
-        Title="MainWindow" Height="auto" Width="auto"
+        Icon="/Icons/contactsbook.png"
+        Title="CONTACT BOOK" Height="auto" Width="auto"
         MinHeight="500" MinWidth="1000">
     <local:PearsonPage/>
 </Window>

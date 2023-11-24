@@ -51,18 +51,18 @@
 
                                 <Button Command="{Binding DataContext.EditDataProvider, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                         CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">      
-                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\edit.png" Height="15"/>
+                                    <Image Source="/Icons/edit.png" Height="15"/>
                                 </Button>
 
                                 <Button Command="{Binding DataContext.DeleteFromTable, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                 CommandParameter="{Binding}" Margin="2 0 0 0" Background="White" BorderBrush="White">
-                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\delete.png" Height="15"/>
+                                    <Image Source="/Icons/delete.png" Height="15"/>
                                 </Button>
 
                                 <Button Command="{Binding DataContext.AcceptEditData, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                     CommandParameter="{Binding}" Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisiblityConverter},
                                     Mode=TwoWay}" Margin="2 0 0 0" Background="White" BorderBrush="White">
-                                    <Image Source="C:\Users\BartlomiejProce\source\repos\ContactBook\ContactBook\Icons\save.png" Height="15"/>
+                                    <Image Source="/Icons/save.png" Height="15"/>
                                 </Button>
 
                             </StackPanel>
@@ -81,7 +81,7 @@
                     <TextBox Text="{Binding PostalCode, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding Town, Mode=TwoWay}" Width="90"/>
                     <TextBox Text="{Binding PhoneNumber, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90"/>
-                    <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Width="90"/>
+                    <DatePicker SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Width="100"/>
                     <TextBox Text="{Binding Age, Converter={StaticResource NullableIntToStringConverter}, Mode=TwoWay}" Width="90" IsEnabled="False"/>
                     <Button Content="ADD" FontWeight="Bold" Command="{Binding AddPearsonCommand }" Width="50" Margin="10 0 0 0" Background="#FFFFA400"/>
 

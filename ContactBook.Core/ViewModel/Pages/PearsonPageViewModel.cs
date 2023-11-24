@@ -29,11 +29,24 @@ namespace ContactBook.Core.ViewModel.Pages
 
         private void AcceptEdit(object parameter)
         {
-            if (parameter is BasePearson pearson)
+            if (parameter is BasePearson pearson &&
+                pearson.FirstName != null && pearson.FirstName != String.Empty &&
+                pearson.LastName != null && pearson.LastName != String.Empty &&
+                pearson.StreetName != null && pearson.StreetName != String.Empty &&
+                pearson.HouseNumber.ToString().Length > 0 &&
+                pearson.PostalCode != null && pearson.PostalCode != String.Empty &&
+                pearson.Town != null && pearson.Town != String.Empty &&
+                pearson.PhoneNumber.ToString().Length == 9 &&
+                pearson.Age.ToString().Length > 0)
             {
                 pearson.IsEditing = false;
                 OnPropertyChanged(nameof(IsEditing));
                 SynchronizeData = true;
+                ErrorDataInfo = false;
+            }
+            else
+            {
+                ErrorDataInfo = true;
             }
         }
 
